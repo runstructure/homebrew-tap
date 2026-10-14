@@ -1,9 +1,6 @@
 # The Homebrew tap — layout and doctrine
 
-This directory IS the tap repository's content, kept in-tree so the install
-path is reviewed like everything else. When a tap repo exists (see "the two
-open identities" below), publishing syncs this directory to it — the tap repo
-itself never carries hand-edited state.
+This directory IS the tap repository's content, kept in-tree so the install path is reviewed like everything else. When a tap repo exists (see "the two open identities" below), publishing syncs this directory to it — the tap repo itself never carries hand-edited state.
 
 ```
 tools/tap/
@@ -20,25 +17,17 @@ tools/tap/
 brew install <org>/tap/structure
 ```
 
-It installs one binary under two names: `structure` (the command) and
-`runstructure` (its second name).
+It installs one binary under two names: `structure` (the command) and `runstructure` (its second name).
 
-The asset names carry no version: the version is the release tag
-(`build-<version>`), and the formula names it.
+The asset names carry no version: the version is the release tag (`build-<version>`), and the formula names it.
 
 ## Why a tap is first
 
-The install doctrine (adopted 2026-08-08, scoreboard addendum §3): install
-offerings ranked `brew install <tap>/structure` → single signed binary from
-Releases → AUR/nix → no-install trial → build from source → `curl | sh` last
-or not at all. No `curl | sh` installer exists in this repo, deliberately.
+The install doctrine (adopted 2026-08-08, scoreboard addendum §3): install offerings ranked `brew install <tap>/structure` → single signed binary from Releases → AUR/nix → no-install trial → build from source → `curl | sh` last or not at all. No `curl | sh` installer exists in this repo, deliberately.
 
 ## How the formula is produced
 
-`bin/release.sh` builds `structure-<os>-<arch>.tar.gz` (a single
-`deno compile` binary, `structure`, with the cockpit dist embedded), emits its release
-assets (checksum · sigstore · SBOM — bin/release_assets.ts), then calls
-`bin/release_tap.ts`, which:
+`bin/release.sh` builds `structure-<os>-<arch>.tar.gz` (a single `deno compile` binary, `structure`, with the cockpit dist embedded), emits its release assets (checksum · sigstore · SBOM — bin/release_assets.ts), then calls `bin/release_tap.ts`, which:
 
 1. reads each artifact's **published** `.sha256` (never recomputing — the
    formula must quote the statement a downloader will check, so a stale
@@ -72,5 +61,4 @@ assets (checksum · sigstore · SBOM — bin/release_assets.ts), then calls
   — the line the site prints, sites/studies/brand.js).
   Unset until ruled.
 
-Everything here is USPTO-gated for publication (docs/naming.md): build and
-verify everything, publish nothing, until formal clearance.
+Everything here is USPTO-gated for publication (docs/naming.md): build and verify everything, publish nothing, until formal clearance.
