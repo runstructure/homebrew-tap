@@ -3,15 +3,13 @@
 class Structure < Formula
   desc "Company harness: typed docs, agent threads, compiled dialects, local cockpit"
   homepage "https://runstructure.com"
-  version "2026-10-17"
+  url "https://github.com/runstructure/structure/releases/download/build-2026-10-21/structure-macos-arm64.tar.gz"
+  version "2026-10-21"
+  sha256 "befd9ffa92a24e252779a629db555237991d60839baf839ae53e62a6aa55db30"
   license "MIT"
 
-  on_macos do
-    on_arm do
-      url "https://github.com/runstructure/structure/releases/download/build-2026-10-17/structure-macos-arm64.tar.gz"
-      sha256 "bf23a7615597328b1426d4c1cfd201614e80f999f129495547accafc5872e68c"
-    end
-  end
+  depends_on arch: :arm64
+  depends_on :macos
 
   # The archive carries one binary, `structure`, named by the application. It
   # installs as `structure`, the command; `runstructure` is its second name.
