@@ -3,9 +3,9 @@
 class Structure < Formula
   desc "Company harness: typed docs, agent threads, compiled dialects, local cockpit"
   homepage "https://runstructure.com"
-  url "https://github.com/runstructure/structure/releases/download/build-2026-10-23/structure-macos-arm64.tar.gz"
-  version "2026-10-23"
-  sha256 "cd0ba46736405309244258e155f51e92257d78ee2f3610b59c9c2bf79766e9b4"
+  url "https://github.com/runstructure/structure/releases/download/build-2026-10-29/structure-macos-arm64.tar.gz"
+  version "2026-10-29"
+  sha256 "b1caa6843845a11e9dd3ccbfcaeeef64b4346ad0ef3dc001f7341360cd2a061a"
   license "MIT"
 
   depends_on arch: :arm64
