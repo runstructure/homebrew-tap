@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Structure < Formula
-  desc "Company harness: typed docs, agent threads, compiled dialects, local cockpit"
+  desc "Command-line tool alone, for Linux or a Mac without the app"
   homepage "https://runstructure.com"
-  url "https://github.com/runstructure/structure/releases/download/build-2026-10-29/structure-macos-arm64.tar.gz"
-  version "2026-10-29"
-  sha256 "b1caa6843845a11e9dd3ccbfcaeeef64b4346ad0ef3dc001f7341360cd2a061a"
+  url "https://github.com/runstructure/structure/releases/download/build-2026-10-30/structure-macos-arm64.tar.gz"
+  version "2026-10-30"
+  sha256 "d56e26b1445747f4ff895960fbf05a88b62d12e70c7376b2b759578e87508bad"
   license "MIT"
 
   depends_on arch: :arm64
@@ -16,6 +16,14 @@ class Structure < Formula
   def install
     bin.install "structure"
     bin.install_symlink "structure" => "runstructure"
+  end
+
+  # On a Mac the app and the command are one package, the cask; this formula is
+  # the command alone. Said on every install there, so the cask is never missed.
+  def caveats
+    return unless OS.mac?
+
+    "On a Mac, for the app and the CLI in one package: brew install --cask runstructure/tap/structure"
   end
 
   test do

@@ -4,20 +4,33 @@ This directory IS the tap repository's content, kept in-tree so the install path
 
 ```
 tools/tap/
-  README.md          this file — becomes the tap repo's README
-  structure.rb.tmpl  the formula skeleton bin/release_tap.ts renders
+  README.md               this file — becomes the tap repo's README
+  structure.rb.tmpl       the formula skeleton bin/release_tap.ts renders
+  structure.cask.rb.tmpl  the cask skeleton, rendered beside it
   Formula/
-    structure.rb     RENDERED by bin/release.sh per release — gitignored here,
-                     committed only in the tap repo, by the publish step
+    structure.rb          RENDERED by bin/release.sh per release — gitignored here,
+                          committed only in the tap repo, by the publish step
+  Casks/
+    structure.rb          RENDERED the same way, on a cut that built the app
 ```
 
-## The install line
+## The install lines
+
+On a Mac, the app and the command in one package (the cask):
+
+```sh
+brew install --cask <org>/tap/structure
+```
+
+It installs `Structure.app` from the release's `Structure-macos.zip` and links the app's sidecar, `Structure.app/Contents/MacOS/structure` (the compiled command, the same program as the terminal tarball's), onto PATH as `structure` and `runstructure`. `brew upgrade` moves the app and the command together.
+
+The command alone, on Linux or a Mac without the app (the formula):
 
 ```sh
 brew install <org>/tap/structure
 ```
 
-It installs one binary under two names: `structure` (the command) and `runstructure` (its second name).
+It installs one binary under two names: `structure` (the command) and `runstructure` (its second name). The two install the same names, so a machine has one or the other. Both are called `structure`, so on a Mac the formula's caveats say the cask's line: "On a Mac, for the app and the CLI in one package: brew install --cask runstructure/tap/structure".
 
 The asset names carry no version: the version is the release tag (`build-<version>`), and the formula names it.
 
@@ -40,8 +53,15 @@ The install doctrine (adopted 2026-08-08, scoreboard addendum §3): install offe
    install` → `structure --version` → `brew test` → uninstall → untap, and
    its download removed from Homebrew's cache) proves the whole install path against the local artifacts. Emitting is not
    verifying; brew's verdict is the one that counts.
-4. on `--publish` with `STRUCTURE_TAP_REPO` set, clones the tap repo, writes
-   the formula and this README (one layout, the one the round trip
+4. on a cut that built the app (`--app-zip Structure-macos.zip`), renders
+   `Casks/structure.rb` from `structure.cask.rb.tmpl`: the zip's sha256 quoted
+   from its published `.sha256`, its URL in the release, the arch of the macOS
+   CLI built beside it. `brew style --cask` lints it in the same scratch tap,
+   and `brew readall` reads it with the formula. It is never installed by the
+   gate: a cask install writes an app into Applications and links into brew's
+   own bin, and a gate does neither on the machine it runs on.
+5. on `--publish` with `STRUCTURE_TAP_REPO` set, clones the tap repo, writes
+   the formula (and the cask, when rendered) and this README (one layout, the one the round trip
    verified), commits and pushes. With it unset, the honest
    state is printed: rendered, NOT pushed.
 
