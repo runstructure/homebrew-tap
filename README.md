@@ -55,11 +55,14 @@ The install doctrine (adopted 2026-08-08, scoreboard addendum §3): install offe
    verifying; brew's verdict is the one that counts.
 4. on a cut that built the app (`--app-zip Structure-macos.zip`), renders
    `Casks/structure.rb` from `structure.cask.rb.tmpl`: the zip's sha256 quoted
-   from its published `.sha256`, its URL in the release, the arch of the macOS
-   CLI built beside it. `brew style --cask` lints it in the same scratch tap,
-   and `brew readall` reads it with the formula. It is never installed by the
-   gate: a cask install writes an app into Applications and links into brew's
-   own bin, and a gate does neither on the machine it runs on.
+   from its published `.sha256`, its URL in the release (the tag spelled
+   through `#{version}`, so `brew audit` reads the URL as versioned), the arch
+   of the macOS CLI built beside it. `brew style --cask` lints it in the same
+   scratch tap, and `brew readall` reads it with the formula. `brew audit
+   --cask` audits it on a scratch Homebrew cloned for the purpose, with its own
+   home, removed after: never the machine's own Homebrew. It is never installed
+   by the gate: a cask install writes an app into Applications and links into
+   brew's own bin, and a gate does neither on the machine it runs on.
 5. on `--publish` with `STRUCTURE_TAP_REPO` set, clones the tap repo, writes
    the formula (and the cask, when rendered) and this README (one layout, the one the round trip
    verified), commits and pushes. With it unset, the honest
