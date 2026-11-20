@@ -3,9 +3,9 @@
 class Structure < Formula
   desc "Command-line tool alone, for Linux or a Mac without the app"
   homepage "https://runstructure.com"
-  url "https://github.com/runstructure/structure/releases/download/build-2026-11-17/structure-macos-arm64.tar.gz"
-  version "2026-11-17"
-  sha256 "4f2f3155a5845ba44a125d109af485192b947a2661a32d5bc9c49042ab1d29e8"
+  url "https://github.com/runstructure/structure/releases/download/build-2026-11-19/structure-macos-arm64.tar.gz"
+  version "2026-11-19"
+  sha256 "d103cf40114db94737f1b6e742101840803a19a04a33c293c552c0d6166fc273"
   license "MIT"
 
   depends_on arch: :arm64

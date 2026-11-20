@@ -1,6 +1,6 @@
 cask "structure" do
-  version "2026-11-17"
-  sha256 "d7b8169ce2f34974af0f91ceee5e70047c3089fe29a2185478cd3f4e06c388f2"
+  version "2026-11-19"
+  sha256 "6dd96f8169b086c87e68ee538e52e8f9d9e21c1a3923f939666483976bc92f3d"
 
   url "https://github.com/runstructure/structure/releases/download/build-#{version}/Structure-macos.zip"
   name "Structure"
